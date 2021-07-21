@@ -1,3 +1,14 @@
+html {
+	box-sizing: border-box;
+	-ms-overflow-style: scrollbar;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: inherit;
+}
+
 body {
 	min-width: 320px;
 	position: relative;
@@ -8,6 +19,7 @@ body {
 	display: flex;
 	flex-direction: column;
 	min-height: 100vh;
+	background-color: #fff;
 }
 
 main {
@@ -23,16 +35,30 @@ input {
 }
 
 input, textarea, button {
+	font-size: inherit;
 	font-family: inherit;
 	font-weight: inherit;
 	appearance: none;
 	color: #000;
 }
 
+input, textarea {
+
+	&::placeholder {
+		color: #949494;
+	}
+
+	&:focus {
+
+		outline: none;
+	}
+}
+
 button {
 	padding: 0;
 	border: none;
 	background: none;
+	cursor: pointer;
 }
 
 a {
@@ -58,4 +84,12 @@ i, em {
 
 .overflow-hidden {
 	overflow: hidden;
+}
+
+.visually-hidden {
+	position: absolute;
+	clip: rect(0 0 0 0);
+	width: 1px;
+	height: 1px;
+	margin: -1px;
 }

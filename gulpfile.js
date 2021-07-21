@@ -5,7 +5,7 @@ const browserSync  = require('browser-sync').create()
 const bssi         = require('browsersync-ssi')
 const ssi          = require('ssi')
 const webpack      = require('webpack-stream')
-const sass         = require('gulp-sass')
+const sass         = require('gulp-dart-sass')
 const sassglob     = require('gulp-sass-glob')
 const cleancss     = require('gulp-clean-css')
 const autoprefixer = require('gulp-autoprefixer')
@@ -85,7 +85,6 @@ async function buildhtml() {
 	let includes = new ssi('app/', 'dist/', '/**/*.html')
 	includes.compile()
 	del('dist/parts', { force: true })
-	del('dist/libs', { force: true })
 }
 
 function cleandist() {
