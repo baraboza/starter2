@@ -12,13 +12,14 @@ html {
 body {
 	min-width: 320px;
 	position: relative;
-	font-family: sans-serif;
 	overflow-x: hidden;
-	color: #000;
-	font-size: 16px;
 	display: flex;
 	flex-direction: column;
 	min-height: 100vh;
+
+	font-family: sans-serif;
+	font-size: 16px;
+	color: #000;
 	background-color: #fff;
 }
 
@@ -26,7 +27,9 @@ main {
 	margin-bottom: auto;
 }
 
-img, svg {
+img, 
+svg,
+iframe {
 	max-width: 100%;
 }
 
@@ -34,7 +37,9 @@ input {
 	text-overflow: ellipsis;
 }
 
-input, textarea, button {
+input, 
+textarea, 
+button {
 	font-size: inherit;
 	font-family: inherit;
 	font-weight: inherit;
@@ -42,7 +47,8 @@ input, textarea, button {
 	color: #000;
 }
 
-input, textarea {
+input, 
+textarea {
 
 	&::placeholder {
 		color: #949494;
@@ -56,6 +62,7 @@ input, textarea {
 
 button {
 	padding: 0;
+	margin: 0;
 	border: none;
 	background: none;
 	cursor: pointer;
@@ -64,17 +71,15 @@ button {
 a {
 	color: inherit;
 	text-decoration: none;
-
-	&:focus {
-		outline: none;
-	}
 }
 
-b, strong {
+b, 
+strong {
 	font-weight: 700;
 }
 
-i, em {
+i, 
+em {
 	font-style: italic;
 }
 

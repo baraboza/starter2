@@ -10,7 +10,6 @@ const sassglob     = require('gulp-sass-glob')
 const cleancss     = require('gulp-clean-css')
 const autoprefixer = require('gulp-autoprefixer')
 const rename       = require('gulp-rename')
-const rsync        = require('gulp-rsync')
 const del          = require('del')
 
 function browsersync() {
@@ -67,11 +66,6 @@ function styles() {
 		.pipe(browserSync.stream())
 }
 
-function images() {
-	return src(['app/img/**/*'])
-		.pipe(browserSync.stream())
-}
-
 function buildcopy() {
 	return src([
 		'{app/js,app/css}/*.min.*',
@@ -91,33 +85,14 @@ function cleandist() {
 	return del('dist/**/*', { force: true })
 }
 
-function deploy() {
-	return src('dist/')
-		.pipe(rsync({
-			root: 'dist/',
-			hostname: 'username@yousite.com',
-			destination: 'yousite/public_html/',
-			// clean: true, // Mirror copy with file deletion
-			include: [/* '*.htaccess' */], // Included files to deploy,
-			exclude: [ '**/Thumbs.db', '**/*.DS_Store' ],
-			recursive: true,
-			archive: true,
-			silent: false,
-			compress: true
-		}))
-}
-
 function startwatch() {
 	watch(`app/scss/**/*`, { usePolling: true }, styles)
 	watch(['app/js/**/*.js', '!app/js/**/*.min.js'], { usePolling: true }, scripts)
-	watch('app/img/**/*.{jpg,jpeg,png,webp,svg,gif}', { usePolling: true }, images)
 	watch(`app/**/*.{${fileswatch}}`, { usePolling: true }).on('change', browserSync.reload)
 }
 
 exports.scripts = scripts
 exports.styles  = styles
-exports.images  = images
-exports.deploy  = deploy
-exports.assets  = series(scripts, styles, images)
-exports.build   = series(cleandist, scripts, styles, images, buildcopy, buildhtml)
-exports.default = series(scripts, styles, images, parallel(browsersync, startwatch))
+exports.assets  = series(scripts, styles)
+exports.build   = series(cleandist, scripts, styles, buildcopy, buildhtml)
+exports.default = series(scripts, styles, parallel(browsersync, startwatch))

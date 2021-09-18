@@ -1,11 +1,11 @@
-@mixin img-box-ratio($ratio) {
+@mixin img-box-ratio($width: 1, $height: 1) {
 	display: block;
 	position: relative;
 
 	&::before {
 		content: '';
 		display: block;
-		padding-top: 100% * $ratio;
+		padding-top: math.div(100% * $height, $width);
 	}
 	
 	img {
